@@ -1,43 +1,52 @@
+
 # Projects for microservices arquitecture JAVA 
 
-Description
-This is a Java project built with the Spring Boot framework. It aims to [briefly describe the purpose or goal of your project].
+[![Build Status](https://travis-ci.org/codecentric/springboot-sample-app.svg?branch=master)](https://travis-ci.org/codecentric/springboot-sample-app)
+[![Coverage Status](https://coveralls.io/repos/github/codecentric/springboot-sample-app/badge.svg?branch=master)](https://coveralls.io/github/codecentric/springboot-sample-app?branch=master)
+[![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
-Table of Contents
-Installation
-Usage
-Features
-Contributing
-License
-Installation
-To run this project locally, make sure you have Java JDK and Maven installed on your system. Then, follow these steps:
+Minimal [Spring Boot](http://projects.spring.io/spring-boot/) sample app.
 
-Clone this repository to your local machine using git clone <repository-url>.
-Navigate to the project's root directory.
-Run mvn install to build the project and download the necessary dependencies.
-Run mvn spring-boot:run to start the application.
-Usage
-[Provide instructions and examples on how to use your project. Include any relevant details or considerations for users.]
+## Requirements
 
-Features
-[List the key features and functionalities of your project.]
+For building and running the application you need:
 
-Feature 1
-Feature 2
-Feature 3
-Contributing
-Contributions are welcome! If you would like to contribute to this project, please follow these steps:
+- [JDK 1.8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+- [Maven 3](https://maven.apache.org)
 
-Fork the repository.
-Create a new branch for your feature or bug fix.
-Make your changes and commit them.
-Push your changes to your forked repository.
-Submit a pull request to the main repository.
-Please ensure your pull request adheres to the project's coding conventions and standards.
+## Running the application locally
 
-License
-[Indicate the license under which your project is released. For example, you can use the MIT License, Apache License, or any other open-source license.]
+There are several ways to run a Spring Boot application on your local machine. One way is to execute the `main` method in the `de.codecentric.springbootsample.Application` class from your IDE.
 
-[Include any relevant acknowledgments or credits.]
+Alternatively you can use the [Spring Boot Maven plugin](https://docs.spring.io/spring-boot/docs/current/reference/html/build-tool-plugins-maven-plugin.html) like so:
 
-Feel free to reach out to me at [your-email@example.com] for any questions or feedback.
+```shell
+mvn spring-boot:run
+```
+
+## Deploying the application to OpenShift
+
+The easiest way to deploy the sample application to OpenShift is to use the [OpenShift CLI](https://docs.openshift.org/latest/cli_reference/index.html):
+
+```shell
+oc new-app codecentric/springboot-maven3-centos~https://github.com/codecentric/springboot-sample-app
+```
+
+This will create:
+
+* An ImageStream called "springboot-maven3-centos"
+* An ImageStream called "springboot-sample-app"
+* A BuildConfig called "springboot-sample-app"
+* DeploymentConfig called "springboot-sample-app"
+* Service called "springboot-sample-app"
+
+If you want to access the app from outside your OpenShift installation, you have to expose the springboot-sample-app service:
+
+```shell
+oc expose springboot-sample-app --hostname=www.example.com
+```
+
+## Copyright
+
+Released under the Apache License 2.0. See the [LICENSE](https://github.com/codecentric/springboot-sample-app/blob/master/LICENSE) file.
+
